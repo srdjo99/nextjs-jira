@@ -9,12 +9,20 @@ import {
   Typography,
 } from '@mui/material';
 import { InboxOutlined, MailOutlined } from '@mui/icons-material';
+import { useContext } from 'react';
+import { UIContext } from '../../context/ui';
 
 const menuItems: string[] = ['Inbox', 'Starred', 'Send Email', 'Drafts'];
 
 export const Sidebar = () => {
+  const { sidemenuOpen } = useContext(UIContext);
+
   return (
-    <Drawer anchor='left' open={false} onClose={() => console.log('cerrando')}>
+    <Drawer
+      anchor='left'
+      open={sidemenuOpen}
+      onClose={() => console.log('cerrando')}
+    >
       <Box sx={{ width: 250 }}>
         <Box sx={{ padding: '5px 10px' }}>
           <Typography variant='h4'>Menu</Typography>
