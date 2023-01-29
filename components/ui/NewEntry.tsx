@@ -1,12 +1,15 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useContext, useState } from 'react';
 import { Box, Button, TextField } from '@mui/material';
 
 import { AddCircleOutlineOutlined, SaveOutlined } from '@mui/icons-material';
+import { EntriesContext } from '../../context/entries/EntriesContext';
 
 export const NewEntry = () => {
   const [isAdding, setIsAdding] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [touched, setTouched] = useState(false);
+
+  const { addNewEntry } = useContext(EntriesContext);
 
   const onTextFieldChanged = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -17,7 +20,10 @@ export const NewEntry = () => {
   const onSave = () => {
     if (inputValue.length === 0) return;
 
-    console.log({ inputValue });
+    addNewEntry(inputValue);
+    setIsAdding(false);
+    setTouched(false);
+    setInputValue('');
   };
 
   return (
