@@ -33,6 +33,7 @@ export const EntriesProvider: FC = ({ children }) => {
 
   const refreshEntries = async () => {
     const { data } = await entriesApi.get<Entry[]>('/entries');
+    dispatch({ type: '[Entry] Refresh-Data', payload: data });
   };
 
   useEffect(() => {
