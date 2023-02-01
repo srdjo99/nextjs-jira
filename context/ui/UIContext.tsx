@@ -3,6 +3,7 @@ import { createContext } from 'react';
 interface ContextProps {
   sidemenuOpen: boolean;
   isAddingEntry: boolean;
+  isDragging: boolean;
 
   // Functions
   openSideMenu: () => void;

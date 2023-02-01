@@ -9,29 +9,7 @@ export interface EntriesState {
 }
 
 const ENTRIES_INITIAL_STATE: EntriesState = {
-  entries: [
-    {
-      _id: uuidv4(),
-      description:
-        'Pending: Proident dolor duis elit sunt qui dolor laborum veniam ea laboris quie consequat.',
-      status: 'pending',
-      createdAt: Date.now(),
-    },
-    {
-      _id: uuidv4(),
-      description:
-        'In-Progress: Veniam in cupidatat adipisicing Lorem sunt est est ex cillum laboris fugiat officia fugiat.',
-      status: 'in-progress',
-      createdAt: Date.now() - 1000000,
-    },
-    {
-      _id: uuidv4(),
-      description:
-        'Finished: Commodo veniam alique tempor officia officia non laborum',
-      status: 'finished',
-      createdAt: Date.now() - 100000,
-    },
-  ],
+  entries: [],
 };
 
 export const EntriesProvider: FC = ({ children }) => {
@@ -45,15 +23,22 @@ export const EntriesProvider: FC = ({ children }) => {
       status: 'pending',
     };
 
-    dispatch({ type: '[Entry] - Add-Entry', payload: newEntry });
+    dispatch({ type: '[Entry] Add-Entry', payload: newEntry });
+  };
+
+  const updateEntry = (entry: Entry) => {
+    dispatch({ type: '[Entry] Updated-Entry', payload: entry });
   };
 
   return (
-    <EntriesContext.Provider value={{ 
-      ...state,
+    <EntriesContext.Provider
+      value={{
+        ...state,
         // methods
         addNewEntry,
-      }}>
+        updateEntry,
+      }}
+    >
       {children}
     </EntriesContext.Provider>
   );
