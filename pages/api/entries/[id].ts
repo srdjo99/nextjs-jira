@@ -17,12 +17,28 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   switch (req.method) {
+    case 'GET':
+      return getEntry(req, res);
     case 'PUT':
       return updateEntry(req, res);
     default:
       return res.status(400).json({ message: "Method don't exist" });
   }
 }
+
+const getEntry = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
+  const { id } = req.query;
+
+  await db.connect();
+  const entryInDB = await Entry.findById(id);
+  await db.disconnect();
+
+  if (!entryInDB) {
+    return res.status(400).json({ message: 'There is no entry with id ' + id });
+  }
+
+  return res.status(200).json(entryInDB);
+};
 
 const updateEntry = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   const { id } = req.query;
