@@ -1,4 +1,5 @@
-import { ChangeEvent, useMemo, useState } from 'react';
+import { ChangeEvent, FC, useMemo, useState } from 'react';
+import { GetServerSideProps } from 'next';
 import {
   capitalize,
   Card,
@@ -17,13 +18,14 @@ import {
 } from '@mui/material';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import { isValidObjectId } from 'mongoose';
 
 import { Layout } from '../../components/layouts';
 import { EntryStatus } from '../../interfaces';
 
 const validStatus: EntryStatus[] = ['pending', 'in-progress', 'finished'];
 
-const EntryPage = () => {
+const EntryPage: FC = () => {
   const [inputValue, setInputValue] = useState('');
   const [status, setStatus] = useState<EntryStatus>('pending');
   const [touched, setTouched] = useState(false);
@@ -109,4 +111,22 @@ const EntryPage = () => {
     </Layout>
   );
 };
+
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const { id } = params as { id: string };
+
+  if (!isValidObjectId(id)) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: { id },
+  };
+};
+
 export default EntryPage;
