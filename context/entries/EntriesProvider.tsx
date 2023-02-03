@@ -27,7 +27,6 @@ export const EntriesProvider: FC = ({ children }) => {
         `/entries/${entry._id}`,
         entry
       );
-
       dispatch({ type: '[Entry] Updated-Entry', payload: data });
     } catch (error) {
       console.log({ error });
