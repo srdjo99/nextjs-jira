@@ -13,6 +13,7 @@
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.6",
     "axios": "0.25.0",
+    "date-fns": "^2.29.3",
     "mongoose": "6.2.9",
     "next": "12.3.4",
     "notistack": "^2.0.8",
