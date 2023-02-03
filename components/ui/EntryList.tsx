@@ -18,7 +18,7 @@ export const EntryList: FC<Props> = ({ status }) => {
   const { isDragging, endDragging } = useContext(UIContext);
 
   const entriesByStatus = useMemo(
-    () => entries.filter((entry) => entry.status === status),
+    () => entries?.filter((entry) => entry.status === status),
     [entries]
   );
 
@@ -51,7 +51,7 @@ export const EntryList: FC<Props> = ({ status }) => {
         }}
       >
         <List sx={{ opacity: isDragging ? 0.3 : 1, transition: 'all .3s' }}>
-          {entriesByStatus.map((entry) => (
+          {entriesByStatus?.map((entry) => (
             <EntryCard key={entry._id} entry={entry} />
           ))}
         </List>
