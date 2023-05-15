@@ -1,5 +1,6 @@
 import { ChangeEvent, FC, useContext, useMemo, useState } from 'react';
 import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
 import {
   capitalize,
   Card,
@@ -23,6 +24,7 @@ import { Layout } from '../../components/layouts';
 import { Entry, EntryStatus } from '../../interfaces';
 import { dbEntries } from '../../database';
 import { EntriesContext } from '../../context/entries';
+import { dateFunctions } from '../../utils';
 
 const validStatus: EntryStatus[] = ['pending', 'in-progress', 'finished'];
 
@@ -31,6 +33,7 @@ interface Props {
 }
 
 const EntryPage: FC<Props> = ({ entry }) => {
+  const router = useRouter();
   const { updateEntry } = useContext(EntriesContext);
 
   const [inputValue, setInputValue] = useState(entry.description);
@@ -59,6 +62,7 @@ const EntryPage: FC<Props> = ({ entry }) => {
     };
 
     updateEntry(updatedEntry, true);
+    router.push('/');
   };
 
   return (
@@ -68,7 +72,9 @@ const EntryPage: FC<Props> = ({ entry }) => {
           <Card>
             <CardHeader
               title={`Entry: `}
-              subheader={`Created at: ${entry.createdAt} mins`}
+              subheader={`Created: ${dateFunctions.getFormatDistanceToNow(
+                entry.createdAt
+              )}`}
             />
             <CardContent>
               <TextField

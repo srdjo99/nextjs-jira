@@ -8,7 +8,7 @@ interface Props {
   title?: string;
 }
 
-export const Layout: FC<Props> = ({ title = 'OpenJira', children }) => {
+export const Layout: FC<Props> = ({ title = 'JiraLite', children }) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Head>

@@ -1,4 +1,4 @@
-# Next.js OpenJira App
+# Next.js JiraLite App
 
 To run it locally, database is necessary
 

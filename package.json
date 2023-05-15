@@ -1,5 +1,5 @@
 {
-  "name": "open-jira",
+  "name": "jira-lite",
   "private": true,
   "scripts": {
     "dev": "next dev",
