@@ -10,7 +10,7 @@ There are already added tasks which you can drag and drop to different sections.
 ##### This is made without external drag&drop library --> using built-in HTML attributes
 
 I've also used:
-  - MongoDb to store tasks
+  - MongoDb to store data
   - Context API for state management
   - MUI 
   - Notistack for displaying notifications
