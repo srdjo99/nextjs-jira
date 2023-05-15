@@ -15,7 +15,7 @@ I've also used:
   - MUI 
   - Notistack for displaying notifications
   - Axios
-  - date-fns
+  - Date-fns
 
 
 
