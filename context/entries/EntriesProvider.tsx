@@ -1,4 +1,5 @@
 import { FC, useEffect, useReducer } from 'react';
+import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
 
 import { Entry } from '../../interfaces';
@@ -16,6 +17,7 @@ const ENTRIES_INITIAL_STATE: EntriesState = {
 export const EntriesProvider: FC = ({ children }) => {
   const [state, dispatch] = useReducer(entriesReducer, ENTRIES_INITIAL_STATE);
   const { enqueueSnackbar } = useSnackbar();
+  const router = useRouter();
 
   const addNewEntry = async (description: string) => {
     const { data } = await entriesApi.post<Entry>('/entries', { description });
@@ -40,6 +42,9 @@ export const EntriesProvider: FC = ({ children }) => {
             horizontal: 'right',
           },
         });
+        setTimeout(() => {
+          router.push('/');
+        }, 2000);
       }
     } catch (error) {
       console.log({ error });

@@ -62,7 +62,6 @@ const EntryPage: FC<Props> = ({ entry }) => {
     };
 
     updateEntry(updatedEntry, true);
-    router.push('/');
   };
 
   return (

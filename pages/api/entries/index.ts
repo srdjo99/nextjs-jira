@@ -35,9 +35,9 @@ const postEntry = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     description: description,
     createdAt: Date.now(),
   });
+  await db.connect();
 
   try {
-    await db.connect();
     await newEntry.save();
     await db.disconnect();
 
